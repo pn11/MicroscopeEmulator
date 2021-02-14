@@ -17,23 +17,21 @@ MICRO = 0
 VERSION = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 
 setup(
-    name='todo',
+    name='MicroscopeEmulator',
     version=VERSION,
-    description="Todo App",
+    description="Microscope Emulator",
     long_description=readme,
     author='pn11',
     author_email='pn11@users.noreply.github.com',
-    url='https://github.com/pn11/python-command-line-sample',
+    url='https://github.com/pn11/MicroscopeEmulator',
     license=license,
     package_dir={"": "src"},
     packages=find_packages(
         where="src",
         exclude=('tests', 'docs')
     ),
-    entry_points={
-        "console_scripts": [
-            "todo=todo.main:main"
-        ]
-    },
-    python_requires='>=3.5'
+    python_requires='>=3.6',
+    install_requires=[
+        'numpy',
+    ]
 )

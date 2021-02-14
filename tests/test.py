@@ -1,8 +1,10 @@
-import todo.main
+import numpy as np
+from microscope_emulator import MicroscopeEmulator
 
-def test_add():
-    todo.main._remove_todo('', all_flag=True)
-    todo.main._add_todo('foo')
-    dic = todo.main._load_todos()
-    assert dic['foo'] == 'Not Yet'
-    
+img = np.zeros((100, 100, 100), dtype=np.uint8)
+ms = MicroscopeEmulator(img, (10, 10))
+
+for i in range(100):
+    ms.move_x(1)
+    print(ms.get_view())
+
