@@ -30,7 +30,7 @@ setup(
         where="src",
         exclude=('tests', 'docs')
     ),
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     install_requires=[
         'numpy',
     ]

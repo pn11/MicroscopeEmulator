@@ -1,5 +1,7 @@
 # MicroScope Emulator
 
+For Python >= 3.7
+
 ## Install
 
 ```sh
