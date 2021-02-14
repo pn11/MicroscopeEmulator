@@ -57,6 +57,14 @@ class MicroscopeEmulator:
     def get_view_point(self):
         return self._get_original_point(*self.inner_view_point)
 
+    def get_pixel_value(self, x=None, y=None, z=None):
+        if x is None:
+            x, y, z = self._get_original_point(*self.inner_view_point)
+            return self.get_pixel_value(x, y, z)
+        else:
+            x, y, z = self._get_inner_point(x, y, z)
+            return self.depth_image[y, x, z]
+
     def _get_original_point(self, x, y, z):
         # 余白追加前の座標を返す
         vx, vy = self.view_size
