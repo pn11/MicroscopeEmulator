@@ -1,9 +1,8 @@
 from setuptools import setup, find_packages
 import sys
 
-if sys.version_info[:2] < (3, 7):
-    raise RuntimeError("Python version >= 3.7 required.")
-
+#if sys.version_info[:2] < (3, 7):
+#    raise RuntimeError("Python version >= 3.7 required.")
 
 with open('README.md') as f:
     readme = f.read()
