@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 import sys
 
-if sys.version_info[:2] < (3, 5):
-    raise RuntimeError("Python version >= 3.5 required.")
+if sys.version_info[:2] < (3, 7):
+    raise RuntimeError("Python version >= 3.7 required.")
 
 
 with open('README.md') as f:
@@ -13,7 +13,7 @@ with open('LICENSE') as f:
 
 MAJOR = 0
 MINOR = 1
-MICRO = 2
+MICRO = 3
 VERSION = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 
 setup(

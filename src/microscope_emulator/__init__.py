@@ -14,10 +14,10 @@ class MicroscopeEmulator:
         self.view_size = view_size
 
     def move_x(self, i: int):
-        self._move(i, axis=1)
+        self._move(i, axis=0)
 
     def move_y(self, i: int):
-        self._move(i, axis=0)
+        self._move(i, axis=1)
 
     def move_z(self, i: int):
         self._move(i, axis=2)
@@ -25,6 +25,8 @@ class MicroscopeEmulator:
     def _move(self, i:int, axis: int):
         p = self.inner_view_point
         p[axis] += i
+        print(p)
+        p = self._get_original_point(*p)
         self.set_view_point(*p)
 
     def get_view(self):
@@ -41,12 +43,14 @@ class MicroscopeEmulator:
         
         # 視野が画像からはみ出さないようにする
         sx, sy, sz = self.depth_image.shape
-        low_y = sy + vy
+        low_y = vy
         up_y = sy - vy - 1
-        low_x = sx + vx
+        low_x = vx
         up_x = sx - vx - 1
         low_z = 0
-        up_z = sz- 1
+        up_z = sz - 1
+        print(sx, sy, sz)
+        print(low_y, up_y)
 
         self.inner_view_point = [
             min(max(x, low_x), up_x),
@@ -72,4 +76,4 @@ class MicroscopeEmulator:
 
     def _get_inner_point(self, x, y, z):
         vx, vy = self.view_size
-        return x-+vx, y+vy, z
+        return x+vx, y+vy, z
