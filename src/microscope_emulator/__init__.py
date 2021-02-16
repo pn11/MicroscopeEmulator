@@ -25,7 +25,6 @@ class MicroscopeEmulator:
     def _move(self, i:int, axis: int):
         p = self.inner_view_point
         p[axis] += i
-        print(p)
         p = self._get_original_point(*p)
         self.set_view_point(*p)
 
@@ -49,8 +48,6 @@ class MicroscopeEmulator:
         up_x = sx - vx - 1
         low_z = 0
         up_z = sz - 1
-        print(sx, sy, sz)
-        print(low_y, up_y)
 
         self.inner_view_point = [
             min(max(x, low_x), up_x),
