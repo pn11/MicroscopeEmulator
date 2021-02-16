@@ -31,6 +31,8 @@ def test_api():
 
     im3 = np.full(fill_value=255, shape=(100, 100), dtype=np.uint8)
     im3[30, 20] = 127
-    ms = MicroscopeEmulator(im3, (10, 10))
+    ms = MicroscopeEmulator(im3, (40, 60))
     Image.fromarray(im3).save('test3.png')
     assert 127 == ms.get_pixel_value(20, 30, 0)
+    ms.set_view_point(20, 30, 0)
+    Image.fromarray(ms.get_view()).save('test4.png')
