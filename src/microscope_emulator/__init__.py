@@ -2,6 +2,16 @@ import numpy as np
 
 class MicroscopeEmulator:
     def __init__(self, depth_image: np.ndarray, view_size: tuple):
+        ndim = depth_image.ndim
+        if ndim == 3:  
+            pass
+        elif ndim == 2:
+            # 2次元の場合は3次元に変換
+            depth_image = depth_image[:,:,np.newaxis]
+        else:
+            print('depth_image must be ndim=2or3')
+            raise ValueError
+
         # view_size 分の余白のある画像を作成
         sy, sx, sz = depth_image.shape
         vx, vy = view_size
@@ -9,6 +19,7 @@ class MicroscopeEmulator:
         nsx, nsy, nsz = new_shape
         self.depth_image = np.full(fill_value=255, shape=new_shape, dtype=depth_image.dtype)
         self.depth_image[vy:vy+sy, vx:vx+sx , :] = depth_image
+
         # デフォルトでは画像の中心にフォーカス
         self.inner_view_point = [nsy//2, nsx//2, nsz//2]
         self.view_size = view_size

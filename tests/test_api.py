@@ -17,12 +17,20 @@ def test_api():
     assert x == 251
     assert y == 249
     assert z == 99
-    print(ms.get_view())
+
     ms.set_view_point(100, 101, 99)
     x, y, z = ms.get_view_point()
     assert x == 100
     assert y == 101
     assert z == 99
+
+    # get_pixel_value
     a = ms.get_pixel_value()
     b = ms.get_pixel_value(*ms.get_view_point())
     assert a == b
+
+    im3 = np.full(fill_value=255, shape=(100, 100), dtype=np.uint8)
+    im3[30, 20] = 127
+    ms = MicroscopeEmulator(im3, (10, 10))
+    Image.fromarray(im3).save('test3.png')
+    assert 127 == ms.get_pixel_value(20, 30, 0)

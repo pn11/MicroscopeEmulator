@@ -11,8 +11,8 @@ with open('LICENSE') as f:
     license = f.read()
 
 MAJOR = 0
-MINOR = 1
-MICRO = 3
+MINOR = 2
+MICRO = 0
 VERSION = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 
 setup(
