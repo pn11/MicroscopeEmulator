@@ -36,3 +36,6 @@ def test_api():
     assert 127 == ms.get_pixel_value(20, 30, 0)
     ms.set_view_point(20, 30, 0)
     Image.fromarray(ms.get_view()).save('test4.png')
+
+    print(ms.get_image_mean())
+    print(ms.get_view_mean())
