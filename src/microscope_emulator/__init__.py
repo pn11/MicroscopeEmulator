@@ -18,7 +18,7 @@ class MicroscopeEmulator:
         new_shape = (sy+vy*2, sx+vx*2, sz)
         nsy, nsx, nsz = new_shape
         self.depth_image = np.full(fill_value=255, shape=new_shape, dtype=depth_image.dtype)
-        self.depth_image[vy:vy+sy, vx:vx+sx , :] = depth_image
+        self.depth_image[vy:vy+sy, vx:vx+sx, :] = depth_image
 
         # デフォルトでは画像の中心にフォーカス
         self.inner_view_point = [nsy//2, nsx//2, nsz//2]
@@ -49,8 +49,7 @@ class MicroscopeEmulator:
     def get_current_image(self):
         _, _, pz = self.inner_view_point
         vx, vy = self.view_size
-        sy, sx, _ = self.depth_image.shape
-        return self.depth_image[vy:vy+sy, vx:vx+sx, pz]
+        return self.depth_image[vy:-vy, vx:-vx, pz]
     
     def set_view_point(self, x: int, y: int, z: int):
         sy, sx, sz = self.depth_image.shape
