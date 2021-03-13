@@ -47,8 +47,10 @@ class MicroscopeEmulator:
         return self.depth_image[yslice, xslice, pz]
 
     def get_current_image(self):
-        px, py, pz = self.inner_view_point
-        return self.depth_image[:, :, pz]
+        _, _, pz = self.inner_view_point
+        vx, vy = self.view_size
+        sy, sx, _ = self.depth_image.shape
+        return self.depth_image[vy:vy+sy, vx:vx+sx, pz]
     
     def set_view_point(self, x: int, y: int, z: int):
         sy, sx, sz = self.depth_image.shape
