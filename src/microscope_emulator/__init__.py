@@ -96,3 +96,35 @@ class MicroscopeEmulator:
 
     def get_image_mean(self):
         return np.mean(self.get_current_image())
+    
+    def get_darkest_position(self, num_layers: int, num_pixels: int):
+        px, py, pz = self.inner_view_point
+        sy, sx, sz = self.depth_image.shape        
+        minz = max(0, pz-num_layers)
+        maxz = min(sz-1, pz+num_layers)
+        minx = max(0, px-num_pixels)
+        maxx = min(sx-1, px+num_pixels)
+        miny = max(0, py-num_pixels)
+        maxy = min(sy-1, py+num_pixels)
+
+        val_darkest = 255
+        pos_darkests = []
+        for z in range(minz,maxz+1):
+            val_temp = np.min(self.depth_image[miny:maxy+1, minx:maxx, z])
+            if val_temp < val_darkest:
+                val_darkest = val_temp
+
+        for z in range(minz,maxz+1): 
+            pos_temp = np.argmin(self.depth_image[miny:maxy+1, minx:maxx, z])
+            pos_darkests.append(pos_temp)
+
+        min_dist = 9999
+        min_pos = None
+        pos_viewpoint = np.array([py, px, pz])
+        for p in pos_darkests:
+            dist_temp = np.linalg.norm(pos_viewpoint-p)
+            if dist_temp < min_dist:
+                min_dist = dist_temp
+                min_pos = [p[1],p[0],p[2]]
+
+        return min_pos
